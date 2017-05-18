@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  todolist:
+    image: todolist:2
+    # restart: always
+    ports:
+      - "8080:8000"
+    environment:
+        DB: postgresql://user:password@database:5432/todo
+    depends_on:
+        - database
+
+  database:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_USER: "user"
+      POSTGRES_DB: "todo"
+    # volumes:
+    #   - ./data:/var/lib/postgresql/data
